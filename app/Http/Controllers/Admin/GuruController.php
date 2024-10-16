@@ -4,24 +4,15 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
-class AdminController extends Controller
+class GuruController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function dashboard()
+    public function guru()
     {
-        return view('admin.dashboard');
-    }
-
-    public function logout(Request $request)
-    {
-        Auth::guard('admin')->logout();
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
-        return redirect()->route('admin.login');
+        return view('admin.guru');
     }
 
     /**
