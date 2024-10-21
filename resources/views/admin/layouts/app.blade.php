@@ -22,11 +22,11 @@
 
     <!-- Customized Bootstrap Stylesheet -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <link href="{{ asset('css/bootstrap.min.css')}}" rel="stylesheet">
-     <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.bootstrap5.css">
+    <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.bootstrap5.css">
 
     <!-- Template Stylesheet -->
-    <link href="{{ asset('css/style.css')}}" rel="stylesheet">
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 </head>
 
 <body>
@@ -57,10 +57,10 @@
                     </div>
                 </div>
                 <div class="navbar-nav w-100">
-                    <a href="{{ route('admin.dashboard') }}" class="nav-item nav-link {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
-                    <a href="{{ route('admin.guru') }}" class="nav-item nav-link {{ request()->routeIs('admin.guru') ? 'active' : '' }}" ><i class="fa fa-th me-2"></i>Guru</a>
-                    <a href="form.html" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>Dudi</a>
-                    <a href="table.html" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Pembimbing</a>
+                    <a href="{{ route('admin.dashboard') }}" class="nav-item nav-link {{ request()-> RouteIs('Admin.dashboard') ? 'active' : '' }}"><i class="fas fa-globe"></i> Dashboard</a>
+                    <a href="{{ route('admin.guru') }}" class="nav-item nav-link {{ request()-> RouteIs('Admin.guru') ? 'active' : '' }}"><i class="fas fa-chalkboard-teacher"></i> Guru</a>
+                    <a href="{{ route('admin.dudi') }}" class="nav-item nav-link {{ request()-> RouteIs('Admin.dudi') ? 'active' : '' }}"><i class="fas fa-home"></i> Dudi</a>
+                    <a href="{{ route('admin.pembimbing') }}" class="nav-item nav-link {{ request()-> RouteIs('Admin.pembimbing') ? 'active' : '' }}"><i class="fas fa-user-plus"></i> Pembimbing</a>
                 </div>
             </nav>
         </div>
@@ -98,12 +98,9 @@
 
             <!-- Sale & Revenue Start -->
             <div class="container-fluid pt-4 px-4">
-              @yield('content')
+                @yield('content')
             </div>
             <!-- Sale & Revenue End -->
-
-
-
 
             <!-- Footer Start -->
             <div class="container-fluid pt-4 px-4">
@@ -136,7 +133,7 @@
     <script src="https://cdn.datatables.net/2.1.8/js/dataTables.bootstrap5.js"></script>
 
     <!-- Template Javascript -->
-    <script src="{{ asset('js/main.js')}}"></script>
+    <script src="{{ asset('js/main.js') }}"></script>
 </body>
 
 </html>

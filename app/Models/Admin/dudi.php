@@ -5,25 +5,18 @@ namespace App\Models\Admin;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Guru extends Model
+class dudi extends Model
 {
     use HasFactory;
-    protected $table = 'guru';
-    protected $primaryKey = 'id_guru';
+    protected $table = 'dudi';
+    protected $primaryKey = 'id_dudi';
 
     protected $fillable = [
-        'nip',
-        'email',
-        'password',
-        'nama_guru',
-        'foto',
+        'nama_dudi',
+        'alamat_dudi',
     ];
 
-    protected $hidden = [
-        'password',
-    ];
-
-    public function pembimbingGuru()
+    public function pembimbingDudi()
     {
         return $this->belongsTo(Pembimbing::class, 'id_guru', 'id_guru');
     }
