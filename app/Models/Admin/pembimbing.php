@@ -18,11 +18,16 @@ class pembimbing extends Model
 
     public function guru()
     {
-        return $this->hasOne(Guru::class, 'id_guru', 'id_guru',);
+        return $this->hasOne(Guru::class, 'id_guru', 'id_guru');
     }
 
     public function dudi()
     {
-        return $this->hasOne(dudi::class, 'id_dudi', 'id_dudi',);
+        return $this->hasOne(dudi::class, 'id_dudi', 'id_dudi');
+    }
+
+    public function siswa()
+    {
+        return $this->hasMany(Siswa::class, 'id_pembimbing', 'id_pembimbing');
     }
 }

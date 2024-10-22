@@ -8,7 +8,7 @@
         <div class="col-12">
             <div class="bg-light rounded h-100 p-4">
                 <h6 class="mb-4">Tambah Pembimbing</h6>
-                <form action="{{ route('admin.pembimbing.store') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('admin.pembimbing.store') }}" method="POST">
                     @csrf
                     <div class="mb-3">
                         <label for="id_guru" class="form-label">Nama Guru</label>
@@ -26,17 +26,18 @@
                     </div>
                     <div class="mb-3">
                         <label for="id_dudi" class="form-label">Nama Dudi</label>
-                         <select name="id_dudi" id="id_dudi" class="form-select">
+                        <select name="id_dudi" id="id_dudi" class="form-select">
                             <option value="">-Pilih-</option>
-                            @foreach ( $dudis as $dudi )
-                           <option value="{{ $dudi->id_dudi }}">{{ $dudi->nama_dudi }}</option>
+                            @foreach($dudis as $dudi)
+                            <option value="{{ $dudi->id_dudi }}">{{ $dudi->nama_dudi }}</option>
                             @endforeach
-                         </select>
+                        </select>
                         <div class="text-danger">
                             @error('id_dudi')
                                 {{ $message }}
                             @enderror
                         </div>
+                    </div>
                         <button type="submit" class="btn btn-primary">Simpan</button>
                 </form>
             </div>

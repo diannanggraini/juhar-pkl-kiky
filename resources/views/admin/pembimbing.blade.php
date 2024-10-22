@@ -1,6 +1,6 @@
 @extends('admin.layouts.app')
 
-@section('title', 'Pembimbing')
+@section('title', 'PEMBIMBING')
 
 @section('content')
 
@@ -12,7 +12,8 @@
                     {{ session('success') }}
                 </div>
             @endif
-            <h6 class="mb-4">DATA Pembimbing</h6>
+
+            <h6 class="mb-4">DATA PEMBIMBING</h6>
             <div class="table-responsive">
                 <a href="{{ route('admin.pembimbing.create') }}" class="btn btn-primary btn-sm">Tambah</a>
                 <table class="table" id="pembimbing">
@@ -20,7 +21,7 @@
                         <tr>
                             <th scope="col">No</th>
                             <th scope="col">Nama Guru</th>
-                            <th scope="col">Nama Dudi</th>
+                            <th scope="col">Nama DUDI</th>
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
@@ -31,8 +32,9 @@
                             <td>{{ $pembimbing->guru->nama_guru }}</td>
                             <td>{{ $pembimbing->dudi->nama_dudi }}</td>
                             <td>
-                                <a href="{{ route('admin.pembimbing.edit')}}" class="btn btn-warning btn-sm">Edit</a>
-                                <a href="{{ route('admin.pembimbing.delete')}}" onclick="return confirm('Yakin ingin hapus data?')" class="btn btn-danger btn-sm">Hapus</a>
+                                <a href="{{ route('admin.pembimbing.edit', $pembimbing->id_pembimbing) }}" class="btn btn-warning btn-sm">Edit</a>
+                                <a href="{{ route('admin.pembimbing.delete', $pembimbing->id_pembimbing) }}" onclick="return confirm('Yakin ingin hapus data?')" class="btn btn-danger btn-sm">Hapus</a>
+                                <a href="{{ route('admin.pembimbing.siswa', $pembimbing->id_pembimbing) }}" class="btn btn-success btn-sm">Siswa</a>
                             </td>
                         </tr>
                         @endforeach
