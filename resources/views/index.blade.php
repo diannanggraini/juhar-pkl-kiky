@@ -47,7 +47,7 @@
                           <h4>JUHAR PKL</h4>
                           <p>Sistem jurnal harian PKL berbasis website, Silahkan Masuk untuk Informasi lebih lanjut</p>
                    </div>
-                   <a href="">
+                   <a href="{{ route('guru.login') }}">
                     <div class="card shadow-sm">
                         <div class="card-body">
                            <div class="d-flex align-items-center">

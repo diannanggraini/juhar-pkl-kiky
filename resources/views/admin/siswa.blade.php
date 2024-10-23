@@ -26,14 +26,14 @@
 <div class="row g-4">
     <div class="col-12">
         <div class="bg-light rounded h-100 p-4">
-            if(@session('success'))
+            @if(session('success'))
             <div class="alert alert-succes">
-                {{ Session('success') }}
+                {{ session('success') }}
             </div>
-            @endsession
+            @endif
             <h6 class="mb-4">Data Siswa</h6>
             <div class="table-responsive">
-                <a href="{{ route('admin.pembimbing.siswa.create $id') }}" class="btn btn-primary btn-sm">Tambah</a>
+                <a href="{{ route('admin.pembimbing.siswa.create', $id) }}" class="btn btn-primary btn-sm">Tambah</a>
                 <table class="table" id="siswa" >
                     <thead>
                         <tr>
@@ -54,8 +54,8 @@
                                 <img src="{{ asset('storage/'. $siswa->foto) }}" alt="" height="30">
                             </td>
                             <td>
-                                <a href="" class="btn btn-warning btn-sm">Edit</a>
-                                <a href="" onclick="return config('Yakin ingin Hapus Data?')" class="btn btn-danger btn-sm">Hapus</a>
+                                <a href="{{ route('admin.pembimbing.siswa.edit', ['id' => $id, 'id_siswa' => $siswa->id_siswa]) }}" class="btn btn-warning btn-sm">Edit</a>
+                                <a href="{{ route('admin.pembimbing.siswa.delete', ['id' => $id, 'id_siswa' => $siswa->id_siswa]) }}" onclick="return config('Yakin ingin Hapus Data?')" class="btn btn-danger btn-sm">Hapus</a>
                             </td>
                         </tr>
                          @endforeach
