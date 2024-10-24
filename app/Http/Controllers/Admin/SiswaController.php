@@ -78,7 +78,7 @@ class SiswaController extends Controller
         $siswa = Siswa::find($id_siswa);
         return view('admin.edit_siswa', compact('siswa', 'id'));
     }
-  
+
     /**
      * Update the specified resource in storage.
      */
@@ -136,5 +136,12 @@ class SiswaController extends Controller
         $siswa->delete();
 
         return redirect()->route('admin.pembimbing.siswa', $id)->with('success', 'Data Siswa Berhasil di Hapus');
+    }
+
+    public function siswaGuru($id)
+    {
+        $siswas = Siswa::where('id_pembimbing',$id )->get();
+        $siswa = Siswa::where('id_pembimbing', $id)->first();
+        return view('guru.siswa', compact('siswas', 'siswa', 'id'));
     }
 }

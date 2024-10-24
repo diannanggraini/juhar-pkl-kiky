@@ -57,4 +57,13 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/admin/pembimbing/{id}/siswa/delete/{id_siswa}', [SiswaController::class, 'delete'])->name('admin.pembimbing.siswa.delete');
 });
 
+Route::middleware(['guru'])->group(function (){
+    Route::get('/guru/dashboard', [GuruController::class, 'dashboard'])->name('guru.dashboard');
+    Route::get('/guru/logout', [GuruController::class, 'logout'])->name('guru.logout');
+
+    Route::get('/guru/pembimbing', [PembimbingController::class, 'pembimbingGuru'])->name('guru.pembimbing');
+    Route::get('/guru/pembimbing/{id}/siswa', [SiswaController::class, 'siswaGuru'])->name('guru.pembimbing.siswa');
+    Route::get('/guru/profile', [GuruController::class, 'profile'])->name('guru.profile');
+    Route::put('/guru/profile/update', [GuruController::class, 'updateGuru'])->name('guru.profile.update');
+});
 
