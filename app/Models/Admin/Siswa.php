@@ -3,9 +3,10 @@
 namespace App\Models\Admin;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+//use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Siswa extends Model
+class Siswa extends Authenticatable
 {
     use HasFactory;
     protected $table = 'siswa';
@@ -26,5 +27,10 @@ class Siswa extends Model
     public function pembimbingSiswa()
     {
         return $this->belongsTo(pembimbing::class, 'id_pembimbing', 'id_pembimbing',);
+    }
+
+    public function kegiatan()
+    {
+        return $this->belongsTo(kegiatan::class, 'id_siswa', 'id_siswa',);
     }
 }
