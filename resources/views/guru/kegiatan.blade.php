@@ -28,7 +28,29 @@
             @endif
             <h6 class="mb-4">Data Kegiatan Siswa</h6>
             <div class="table-responsive">
-                <table class="table" id="siswa" >
+                <form action="{{ route('guru.pembimbing.siswa.kegiatan.cari', ['id' => $id_pembimbing, 'id_siswa' => $id_siswa])}}" method="GET" class="row-g"></form>
+                <div class="col-auto">
+                    <label for="tanggal_awal" class="form-label">Tanggal Awal</label>
+                    <input type="date" class="form-control" id="tanggal_awal" value="{{ $tanggalAwal ?? ''}}">
+                    <div class="text-danger">
+                        @error('tanggal_awal')
+                            {{ $message }}
+                        @enderror
+                    </div>
+                </div>
+                <div class="col-aouto">
+                    <label for="tanggal_akhir" class="form-label">Tanggal Akhir</label>
+                    <input type="text" class="form-control" id="tanggal_akhir" value="{{ $tanggal_akhir ?? '' }}">
+                    <div class="text-danger">
+                        @error('tanggal_akhir')
+                            {{ $message }}
+                        @enderror
+                    </div>
+                <div class="col-auto align-self-end">
+                    <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
+                    <a href="{{  route('guru.pembimbing.siswa.kegiatan', ['id' => $id_pembimbing, 'id_siswa' => $id_siswa])}}" class="btn btn-primary"><i class="fas fa-sync-alt"></i></a>
+                </div>
+                <table class="table" id="kegiatan" >
                     <thead>
                         <tr>
                             <th scope="col">No</th>

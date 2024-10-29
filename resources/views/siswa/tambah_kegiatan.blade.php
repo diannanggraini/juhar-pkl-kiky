@@ -7,37 +7,38 @@
     <div class="row g-4">
         <div class="col-12">
             <div class="bg-light rounded h-100 p-4">
-                <h6 class="mb-4">Tambah kegiatan</h6>
-                <form action="{{ route('admin.pembimbing.store') }}" method="POST">
+                <h6 class="mb-4">Tambah Kegiatan</h6>
+                <form action="{{ route('siswa.kegiatan.storeKegiatan') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="mb-3">
-                        <label for="" class="form-label">Tanggal</label>
-                        <select name="id_guru" id="id_guru" class="form-select">
-                            <option value="">-Pilih-</option>
-                            @foreach($gurus as $guru)
-                            <option value="{{ $guru->id_guru }}">{{ $guru->nama_guru }}</option>
-                            @endforeach
-                        </select>
+                        <label for="tanggal_kegiatan" class="form-label">Tanggal Kegiatan</label>
+                        <input type="date" class="form-control" id="tanggal_kegiatan" name="tanggal_kegiatan">
                         <div class="text-danger">
-                            @error('id_guru')
+                            @error('tanggal_kegiatan')
                                 {{ $message }}
                             @enderror
                         </div>
                     </div>
                     <div class="mb-3">
-                        <label for="id_dudi" class="form-label">Nama Dudi</label>
-                        <select name="id_dudi" id="id_dudi" class="form-select">
-                            <option value="">-Pilih-</option>
-                            @foreach($dudis as $dudi)
-                            <option value="{{ $dudi->id_dudi }}">{{ $dudi->nama_dudi }}</option>
-                            @endforeach
-                        </select>
+                        <label for="nama_kegiatan" class="form-label">Nama Kegiatan</label>
+                        <input type="text" class="form-control" id="nama_kegiatan" name="nama_kegiatan">
                         <div class="text-danger">
-                            @error('id_dudi')
+                            @error('nama_kegiatan')
                                 {{ $message }}
                             @enderror
                         </div>
-                    </div>
+                    <div class="mb-3">
+                        <label for="ringkasan_kegiatan" class="form-label">Ringkasan Kegiatan</label>
+                        <input type="text" class="form-control" id="ringkasan_kegiatan" name="ringkasan_kegiatan">
+                        <div class="text-danger">
+                            @error('ringkasan_kegiatan')
+                                {{ $message }}
+                            @enderror
+                        </div>
+                        <div class="mb-3">
+                            <label for="foto" class="form-label">Foto</label>
+                            <input type="file" class="form-control" id="foto" name="foto">
+                        </div>
                         <button type="submit" class="btn btn-primary">Simpan</button>
                 </form>
             </div>

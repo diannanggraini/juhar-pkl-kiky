@@ -159,11 +159,113 @@ class SiswaController extends Controller
         return view('siswa.kegiatan', compact('kegiatans'));
     }
 
-    public function createKegiataan($id)
+    public function createKegiatan()
     {
-        return view('admin.tambah_kegiatan', compact('id'));
+        return view('siswa.tambah_kegiatan');
     }
 
+    public function storeKegiatan(Request $request)
+    {
+        $request->validate([
+            'tanggal_kegiatan' => 'required|date',
+            'nama_kegiatan' => 'required|string|max:255',
+            'ringkasan_kegiatan' => 'required|string|max:255',
+            'foto' => 'nullable|image|mimes:jpeg,jpg,png,gif|max:2048',
+        ]);
 
+        $foto=null;
+
+        if ($request->hasfile('foto')) {
+            $uniqueField = uniqid() .'_'. $request->file('foto')->getClientOriginalName();
+
+            $request->file('foto')->storeAs('foto_kegiatan', $uniqueField, 'public');
+
+            $foto = 'foto_kegiatan/' . $uniqueField;
+        }
+
+        $id_siswa = Auth::guard('siswa')->user()->id_siswa;
+
+        kegiatan::create([
+            'id_siswa' => $id_siswa,
+            'tanggal_kegiatan' => $request->tanggal_kegiatan,
+            'nama_kegiatan' => $request->nama_kegiatan,
+            'ringkasan_kegiatan' => $request->ringkasan_kegiatan,
+            'foto' => $foto,
+        ]);
+
+        return redirect()->route('siswa.kegiatan')->with('succes', 'Data Kegiatan Berhasil di Tambah');
+    }
+
+    public function deleteKegiatan( $id_kegiatan)
+    {
+        $id_siswa = Auth::guard('siswa')->user()->id_siswa;
+        $kegiatan =kegiatan::find($id_kegiatan);
+
+        if ($kegiatan->foto) {
+         $foto =  $kegiatan->foto;
+
+         if (Storage::disk('public')->exists($foto)) {
+          Storage::disk('public')->delete($foto);
+         }
+
+        }
+        $kegiatan->delete();
+
+        return redirect()->route('siswa.kegiatan')->with('success', 'Data kegiatan Berhasil di Hapus');
+    }
+
+    public function editKegiatan(string $id, $id_kegiatan)
+    {
+        $siswa = Auth::guard('siswa')->user()->id_siswa;
+
+        $kegiatan = kegiatan::where('id_siswa', $siswa)
+             ->where('id_kegiatan', $id_kegiatan)
+             ->first();
+
+        if (!$kegiatan) {
+            return back()->withErrors(['acces' => 'Kegiatan tidak ditemukan']);
+        }
+        return view('siswa.edit_kegiatan', compact('kegiatan', 'siswa', 'id_kegiatan'));
+    }
+
+    public function updateKegiatan(Request $request, string $id_kegiatan)
+    {
+        $id_siswa = Auth::guard('siswa')->user()->id_siswa;
+        $kegiatan = kegiatan::find($id_kegiatan);
+
+        $request->validate([
+           'tanggal_kegiatan' => 'required',
+            'nama_kegiatan' => 'required',
+            'ringkasan_kegiatan' => 'required',
+            'foto' => 'nullable|image|mimes:jpeg,jpg,png,gif|max:2048',
+        ]);
+
+        $foto = $kegiatan->foto;
+        if ($request->hasFile('foto')) {
+            if ($foto) {
+                Storage::disk('public')->delete($foto);
+            }
+            $uniqueFile = uniqid() . '_' . $request->file('foto')->getClientOriginalName();
+            $request->file('foto')->storeAs('foto_kegiatan', $uniqueFile, 'public');
+            $foto = 'foto_kegiatan/' . $uniqueFile;
+        }
+
+        $kegiatan->update([
+           'tanggal_kegiatan' => $request->tanggal_kegiatan,
+            'nama_kegiatan' =>  $request->nama_kegiatan,
+            'ringkasan_kegiatan' => $request->ringkasan_kegiatan,
+            'foto' => $foto,
+        ]);
+
+        return redirect()->route('siswa.kegiatan')->with('success', 'Data Siswa Berhasil di Update');
+    }
+
+    public function logout(Request $request)
+    {
+        Auth::guard('siswa')->logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect()->route('siswa.login');
+    }
 
 }
